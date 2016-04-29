@@ -42,6 +42,7 @@ connection.query("SELECT * FROM Products", function(err, rows) {
 	prompt.get(['ProductName', 'Quantity'], function (err, result) {
 		if (err) throw err;
 		var stuff = [];
+		var stuff1 = [];
 		//keeps track of unused goods
 
 		for(var a=0;a<rows.length;a++){
@@ -49,6 +50,7 @@ connection.query("SELECT * FROM Products", function(err, rows) {
 			var Cost = result.Quantity*rows[a].Price;
 			//pushes goods into an array
 			stuff.push(rows[a].ProductName);
+			stuff1.push(rows[a].ProductName);
 
 			//grabs item the person chose
 			if (result.ProductName == rows[a].ProductName){
@@ -77,7 +79,7 @@ connection.query("SELECT * FROM Products", function(err, rows) {
 			}
 		};
 		//if stuff.lenght is more than 9 then no order has been placed due to error
-		if (stuff.length>9) {
+		if (stuff.length===stuff1.length) {
 			console.log("Input Error, Undefined Product Name");
 			// console.log(stuff.length)
 			connection.end();
